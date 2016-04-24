@@ -1,0 +1,7 @@
+
+description: Description of the feature
+# customize versions here
+# dependencies:
+#   compile:
+#     - "org.grails.plugins:myplugin:1.0"
+#

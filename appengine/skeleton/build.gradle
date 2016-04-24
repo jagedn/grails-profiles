@@ -1,0 +1,48 @@
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+repositories  {
+    mavenCentral()
+}
+
+bower  {
+    'angular-cookies'('1.4.x') {
+        source 'angular-cookies.js' >> '/angular/'
+    }
+}
+
+
+bootRun{
+    environment 'googleKey', project.googleKey
+    environment 'googleSecret', project.googleSecret
+
+    // if you want to use a local datastore
+    jvmArgs = [
+            '-DDATASTORE_DATASET=my-dataset',
+            '-DDATASTORE_HOST=http://localhost:8777',
+            '-DDATASTORE_EMULATOR_HOST=localhost:8777',
+            '-DDATASTORE_PROJECT_ID=my-project',
+    ]
+
+}
+
+task explodedWar(type: Copy) {
+    into "$buildDir/exploded-app"
+    with war
+}
+
+assemble << {
+    explodedWar.execute()
+    copy{
+        from 'src/main/appengine/app.yaml'
+        into 'build/exploded-app'
+    }
+    def dockerFile = new File('build/exploded-app/Dockerfile')
+    dockerFile.text = """#jetty9-compat is Jetty 9.3.2 and support only Open JDK8:
+FROM gcr.io/google_appengine/jetty9-compat
+ENV googleKey ${project.googleKey}
+ENV googleSecret ${project.googleSecret}
+ADD . /app
+"""
+}

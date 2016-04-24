@@ -1,0 +1,14 @@
+import grails.core.*
+import grails.util.*
+import grails.plugins.*
+import org.grails.core.artefact.*
+
+model{
+    String username
+    Set roles
+}
+
+json {
+	username username
+	roles roles
+}

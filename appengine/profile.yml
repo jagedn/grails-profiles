@@ -1,0 +1,20 @@
+description: A profile for creating Google AppEngine applications 
+features:
+    required:
+        - json-views
+        - asset-pipeline
+    defaults:
+        - security
+        - oauth
+repositories:
+    - "http://repo1.maven.org/maven2/"
+dependencies:
+    provided:
+        - "org.springframework.boot:spring-boot-starter-jetty"
+    compile:
+        - 'javax.cache:cache-api:1.0.0'
+        - 'com.google.appengine:appengine-api-1.0-sdk:$appEngineVersion'
+        - 'com.google.gcloud:gcloud-java:$gcloudVersion'
+    excludes:
+        - "org.springframework.boot:spring-boot-starter-tomcat:latest"
+        - "javax.servlet:servlet-api:latest"
