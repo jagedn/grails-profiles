@@ -7,6 +7,13 @@ env_variables:
   'serverURL': 'http://YOUR_PROJECT_.appspot.com'
   'googleKey': 'xxxxxxxxxxxxxxxxxx.apps.googleusercontent.com'
   'googleSecret': 'xxxxxxxxxxxxxxxxxx'
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 2
+  cool_down_period_sec: 120 # default value
+  cpu_utilization:
+    target_utilization: 0.5
+
 beta_settings:
   'java_quickstart': 'true'
 health_check:
