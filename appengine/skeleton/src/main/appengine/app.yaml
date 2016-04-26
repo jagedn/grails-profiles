@@ -1,10 +1,12 @@
-runtime: custom
+runtime: java
 vm: True
 instance_class: F1
 threadsafe: True
 auto_id_policy: default
 env_variables:
-  'serverURL': 'https://your-project-here.appspot.com'
+  'serverURL': 'http://YOUR_PROJECT_.appspot.com'
+  'googleKey': 'xxxxxxxxxxxxxxxxxx.apps.googleusercontent.com'
+  'googleSecret': 'xxxxxxxxxxxxxxxxxx'
 beta_settings:
   'java_quickstart': 'true'
 health_check:

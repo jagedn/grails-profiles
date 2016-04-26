@@ -27,22 +27,15 @@ bootRun{
 
 }
 
-task explodedWar(type: Copy) {
-    into "$buildDir/exploded-app"
-    with war
-}
-
 assemble << {
-    explodedWar.execute()
     copy{
         from 'src/main/appengine/app.yaml'
-        into 'build/exploded-app'
+        into 'build/libs'
     }
-    def dockerFile = new File('build/exploded-app/Dockerfile')
-    dockerFile.text = """#jetty9-compat is Jetty 9.3.2 and support only Open JDK8:
-FROM gcr.io/google_appengine/jetty9-compat
-ENV googleKey ${project.googleKey}
-ENV googleSecret ${project.googleSecret}
-ADD . /app
-"""
 }
+
+assets {
+    minifyJs = true
+    minifyCss = true
+}
+
